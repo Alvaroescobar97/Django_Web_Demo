@@ -1,6 +1,6 @@
 # 🚀 Django_Web_Demo
 
-Esta es una aplicación web desarrollada con Django para exponer a nuestros compañeros de clase cómo trabajar con este framework.
+Esta es una aplicación web desarrollada con Django y explicada para que cualquiera que quiera aprender a desarrollar aplicaciones web con Python & Django pueda seguir esta guia y aprender a trabajar con este maravilloso framework.
 
 ### 📋 Requisitos 
 
@@ -141,6 +141,77 @@ INSTALLED_APPS = (
 ### ⌨️ Primeros pasos 
 
 Para empezar vamos a crear la primera vista con Django en el archivo ```views.py``` dentro del directorio de la aplicación restaurant
+```
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def index(request):
+   return HttpResponse("Hello World!")
+```
+Ahora bien, para poder acceder a esta vista desde el navegador se debe configurar la ruta de entrada a esa vista en un nuevo archivo de Python que se crea de la siguiente manera: Damos click derecho sobre la carpeta de la aplicación ```\restaurant``` , New -> Python File, especificamos el nombre ```urls.py``` y declaramos las variables así: 
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+   path('', views.index, name='index')
+]
+```
+Y por último, debemos enlazar el archivo ```restaurant\urls.py``` de la aplicación con el archivo ```webDemo\urls.py``` del proyecto.
+```
+from django.urls import path, include
+
+urlpatterns = [
+   path('admin/', admin.site.urls),
+   path('webDemo/', include('restaurant.urls'))
+]
+```
+Si entramos a la ruta http://127.0.0.1:8000/webDemo/ desde el navegador podemos ver nuestro primer "Hello World!" en Django :)
+
+Luego de crear nuestra primera vista debemos definir el modelo de nuestra aplicación dentro del archivo ```restaurant\models.py```
+```
+from django.db import models
+
+# Create your models here.
+
+class Ingrediente(models.Model):
+   nombre = models.CharField(max_length=50)
+   cantidad = models.IntegerField(default=0)
+
+   def __str__(self):
+       return f"id={self.id}, nombre={self.nombre},cantidad={self.cantidad}"
+
+class Plato(models.Model):
+   nombre = models.CharField(max_length=50)
+   descripcion = models.CharField(max_length=50)
+   ingredientes = models.ManyToManyField(Ingrediente)
+
+   def __str__(self):
+       return f"id={self.id}, nombre={self.nombre},descripcion={self.descripcion},ingredientes={self.ingredientes}"
+```
+Una vez tenemos definido el modelo se puede ejecutar el siguiente comando para crear las migraciones que se plasmarán en el modelo en la base de datos
+```
+python manage.py makemigrations restaurant
+```
+Habiendo creado las migraciones se puede proceder a migrar el modelo que definimos a la base de datos mediante el siguiente comando
+```
+python manage.py migrate
+```
+Lo que creará un nuevo archivo en la carpeta ```restaurant\migrations``` con el historial de las migraciones realizadas.
+
+Si quisieramos obtener más información o cambiar la base de datos del proyecto (SQLite) podemos configurar esto en el archivo ```settings.py``` del proyecto.
+```
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
 
 
 ### ✒️ Autores 
