@@ -59,12 +59,15 @@ Podemos también comprobar la versión del framework con el comando
 ```
 django-admin --version
 ```
+
+## 🔩 Arquitectura y Estructura 
+
+![Contenido](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Arquitectura.png)
+
 Una vez instalado el framework con sus dependencias en el entorno virtual podemos crear el proyecto
 ```
 django-admin startproject webDemo
 ```
-
-## 🔩 Arquitectura y Estructura 
 
 El comando anterior creará un directorio ```.\webDemo``` dentro del entorno virtual con la siguiente estructura
 ```
