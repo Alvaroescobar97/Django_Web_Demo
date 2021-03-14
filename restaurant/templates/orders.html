@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<ul>
+    {% for orden in listado_ordenes %}
+    <li>
+        <h3>Orden Id: {{orden.id}} </h3>
+        <p><strong>El cliente es:</strong></p>
+        <p>{{orden.client}} </p>
+        <p><strong>Los productos que ordenó son:</strong></p>
+        
+        {% for producto in orden.product.all %}
+        <p>{{producto}}</p>
+        {% endfor %}
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+
+{% endblock %}
