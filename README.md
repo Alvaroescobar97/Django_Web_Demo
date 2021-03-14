@@ -109,7 +109,7 @@ _Nota:    Proyectos vs. Aplicaciones_
 
 Una aplicación es una aplicación web que hace algo, por ejemplo, un sistema de registro web, una base de datos de registros públicos o una aplicación de encuesta simple. Un proyecto es una colección de configuraciones y aplicaciones para un sitio web en particular. Un proyecto puede contener varias aplicaciones. Una aplicación puede estar en varios proyectos.
 
-Para crear una aplicación, hay que asegurarse de estar en el directorio exterior ```webDemo/``` pa interactuar con ```manage.py``` y ejecutar el siguiente comando
+Para crear una aplicación, hay que asegurarse de estar en el directorio exterior ```webDemo/``` para interactuar con ```manage.py``` y ejecutar el siguiente comando
 ```
 python manage.py startapp restaurant
 ```
