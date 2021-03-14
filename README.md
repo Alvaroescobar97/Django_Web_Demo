@@ -2,7 +2,7 @@
 
 Esta es una aplicación web desarrollada con Django y explicada para que cualquiera que quiera aprender a desarrollar aplicaciones web con Python & Django pueda seguir esta guia y aprender a trabajar con este maravilloso framework.
 
-### 📋 Requisitos 
+## 📋 Requisitos 
 
 Para empezar con este proyecto es necesario tener instalado Python y pip
 
@@ -48,7 +48,7 @@ Para activar y desactivar el entorno ingresamos al directorio del entorno cd .\w
 deactivate
 ```
 
-### 🛠️ Instalación 
+## 🛠️ Instalación 
 
 Para instalar Django ejecutar dentro del entorno virtual ```\web_env```
 ```
@@ -62,7 +62,10 @@ Una vez instalado el framework con sus dependencias en el entorno virtual podemo
 ```
 django-admin startproject webDemo
 ```
-Esto creará un directorio ```.\webDemo``` dentro del entorno virtual con la siguiente estructura
+
+## 🔩 Arquitectura y Estructura 
+
+El comando anterior creará un directorio ```.\webDemo``` dentro del entorno virtual con la siguiente estructura
 ```
 webDemo/
     |__ manage.py
@@ -94,8 +97,6 @@ Formas de interactuar con el framework
 $ django-admin <command> [options]
 $ python manage.py <command> [options]
 ```
-
-### 🔩 Arquitectura y Estructura 
 
 Para comprobar que el proyecto funciona dentro del directorio del proyecto ```webDemo\``` ejecutamos el siguiente comando para iniciar el servidor local de nuestro proyecto.
 ```
@@ -139,7 +140,7 @@ INSTALLED_APPS = (
     'restaurant',
 )
 ```
-### ⌨️ Primeros pasos 
+## ⌨️ Primeros pasos 
 
 Para empezar vamos a crear la primera vista con Django en el archivo ```views.py``` dentro del directorio de la aplicación restaurant
 ```
@@ -402,13 +403,13 @@ restaurant/
     |__ views.py
 ```
 
-### 📖 Conceptos Avanzados
+## 📖 Conceptos Avanzados
 
 
 
 
 
-### ✒️ Autores 
+## ✒️ Autores 
 
 * Álvaro José Escobar González
 * Juan Manuel Castillo Herrera
