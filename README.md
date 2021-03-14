@@ -45,10 +45,9 @@ pip freeze
 pip list
 ```
 Para activar y desactivar el entorno ingresamos al directorio del entorno cd .\web_env\ y una vez dentro del directorio \web_env se puede activar o desactivar el entorno con los siguientes comandos
-```
-.\Scripts\activate
-deactivate
-```
+
+* ```.\Scripts\activate```
+* ```deactivate```
 
 ## 🛠️ Instalación 
 
