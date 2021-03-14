@@ -6,11 +6,18 @@
     <li>
         <h3>Orden Id: {{orden.id}} </h3>
         <p><strong>El cliente es:</strong></p>
-        <p>{{orden.client}} </p>
+
+        <p>{{orden.client.name}}</p>
+        <a href={% url 'cliente' orden.client.id %}>Ver Datos Cliente</a>
+
         <p><strong>Los productos que ordenó son:</strong></p>
-        
+
         {% for producto in orden.product.all %}
-        <p>{{producto}}</p>
+        <ul>
+            <li>ID: {{producto.id}} - Nombre: {{producto.name}}</li>
+            <li>Precio: {{producto.price}}</li>
+            <li>Descripcion: {{producto.description}}</li>
+        </ul>
         {% endfor %}
     </li>
     <hr>

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Order
+from .models import Order,Client
  
 # Create your views here.
 def index(request):
@@ -10,3 +10,12 @@ def index(request):
         'listado_ordenes': orders
     }
     return render(request, 'orders.html' ,context)
+
+def cliente_detail(request, client_id):
+    client = Client.objects.get(pk=client_id)
+    context = {
+        'titulo_pagina': 'Detalles del Cliente',
+        'cliente': client
+    }
+    return render(request, 'client.html' ,context)
+    

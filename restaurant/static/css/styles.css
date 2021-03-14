@@ -43,3 +43,11 @@ li > h3 {
     border-radius: 10px;
     background: #2a9d8f;
 }
+
+a{
+    padding: 10px 10px;
+    background: #e76f51;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}

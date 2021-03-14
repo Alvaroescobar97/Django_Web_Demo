@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% if cliente %}
+
+    <ul>
+        
+        <li>
+            <strong>ID:</strong> {{cliente.id}}
+        </li>
+        <li>
+            <strong>Nombre:</strong> {{cliente.name}}
+        </li>
+        <li>
+            <strong>Telefono:</strong> {{cliente.phone}}
+        </li>
+        <li>
+            <strong>Email:</strong> {{cliente.email}}
+        </li>
+    </ul>
+    <hr>
+    <a href={% url 'index' %}>Volver</a>
+{% endif %}
+{% endblock %}
