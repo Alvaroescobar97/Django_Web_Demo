@@ -62,7 +62,7 @@ django-admin --version
 
 ## 🔩 Arquitectura y Estructura 
 
-![Arquitectura&Estructura](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Arquitectura.png)
+![Arquitectura&Estructura](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Arquitectura&Estructura.png)
 
 Una vez instalado el framework con sus dependencias en el entorno virtual podemos crear el proyecto
 ```
