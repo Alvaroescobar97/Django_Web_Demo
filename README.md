@@ -123,9 +123,9 @@ restaurant/
     |__ __init__.py
     |__ admin.py
     |__ apps.py
-    |__models.py
-    |__tests.py
-    |__views.py
+    |__ models.py
+    |__ tests.py
+    |__ views.py
 ```
 Una vez creada la aplicación se debe agregar a la lista de aplicaciones instaladas en el archivo ```webDemo/settings.py``` de la siguiente manera
 ```
@@ -207,7 +207,7 @@ Habiendo creado las migraciones se puede proceder a migrar el modelo que definim
 ```
 python manage.py migrate
 ```
-Lo que creará un nuevo archivo en la carpeta ```restaurant\migrations``` con el historial de las migraciones realizadas.
+Lo que creará un nuevo archivo en la carpeta ```restaurant\migrations``` llamado ```0001_initial.py``` con el historial de las migraciones realizadas.
 
 Si quisiéramos obtener más información o cambiar la base de datos del proyecto (SQLite) podemos configurar esto en el archivo ```settings.py``` del proyecto.
 ```
@@ -285,7 +285,7 @@ Para crear el template ```orders.html``` primero se debe añadir la siguiente co
 ```
 STATICFILES_DIRS = [BASE_DIR / "static"]
 ```
-Y ahora creamos el directorio donde almacenaremos los archivos estáticos de la aplicación, damos click derecho sobre la aplicación restaurant y creamos las carpetas ```static``` y ```templates```. Dentro de la carpeta ```stati```c creamos otra llamada ```css``` y posteriormente un archivo llamado ```styles.css```. Dentro incluiremos los siguientes estilos:
+Y ahora creamos el directorio donde almacenaremos los archivos estáticos de la aplicación, damos click derecho sobre la aplicación restaurant y creamos las carpetas ```static``` y ```templates```. Dentro de la carpeta ```static``` creamos otra llamada ```css``` y posteriormente un archivo llamado ```styles.css```. Dentro incluiremos los siguientes estilos:
 ```
 body{
     font-family: 'Roboto', sans-serif;
@@ -359,7 +359,7 @@ Dentro de la carpeta templates creamos un archivo llamado ```base.html```
     </body>
 </html>
 ```
-Y por ultimo el archivo referente a la vista ```orders.html```
+Y por último el archivo referente a la vista ```orders.html```
 ```
 {% extends 'base.html' %}
 
@@ -382,6 +382,30 @@ Y por ultimo el archivo referente a la vista ```orders.html```
 
 {% endblock %}
 ```
+Deberíamos terminar con la siguiente estructura.
+```
+restaurant/
+    |__ migrations/
+        |__ _init_.py
+        |__ 0001_initial.py
+    |__ static/
+        |__ css/
+            |__ styles.css
+    |__ templates/
+        |__ base.html
+        |__ orders.html
+    |__ __init__.py
+    |__ admin.py
+    |__ apps.py
+    |__ models.py
+    |__ tests.py
+    |__ views.py
+```
+
+### 📖 Conceptos Avanzados
+
+
+
 
 
 ### ✒️ Autores 
