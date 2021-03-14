@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<ul>
+    {% for orden in listado_ordenes %}
+    <li>
+        <h3>Orden Id: {{orden.id}} </h3>
+        <p><strong>El cliente es:</strong></p>
+
+        <p>{{orden.client.name}}</p>
+        <a href={% url 'cliente' orden.client.id %}>Ver Datos Cliente</a>
+
+        <p><strong>Los productos que ordenó son:</strong></p>
+
+        {% for producto in orden.product.all %}
+        <ul>
+            <li>ID: {{producto.id}} - Nombre: {{producto.name}}</li>
+            <li>Precio: {{producto.price}}</li>
+            <li>Descripcion: {{producto.description}}</li>
+        </ul>
+        {% endfor %}
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+
+{% endblock %}

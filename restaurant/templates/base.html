@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Restaurante</title>
+</head>
+<style>
+
+</style>
+    <body>
+        <h1>Aplicación Restaurante</h1>
+        <div class="contenedor">
+
+            <h2>{{titulo_pagina}}</h2>
+
+            {% block contenido %} {% endblock %}
+        </div>
+    </body>
+</html>
