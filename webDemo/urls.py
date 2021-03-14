@@ -18,5 +18,11 @@ from django.urls import path, include
 
 urlpatterns = [
    path('admin/', admin.site.urls),
+<<<<<<< HEAD
+   path('webDemo/', include('restaurant.urls')),
+   path('api/', include('apirest.urls'))
+]
+=======
    path('webDemo/', include('restaurant.urls'))
 ]
+>>>>>>> ccee2712926624bdd6ec1ca35fedfc75786802af

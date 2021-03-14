@@ -1,5 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+<<<<<<< HEAD
+
+# Create your views here.
+def index(request):
+   return HttpResponse("Hello, World!")
+# Create your views here.
+=======
 from .models import Order,Client
  
 # Create your views here.
@@ -19,3 +26,4 @@ def cliente_detail(request, client_id):
     }
     return render(request, 'client.html' ,context)
     
+>>>>>>> ccee2712926624bdd6ec1ca35fedfc75786802af
