@@ -274,7 +274,7 @@ Ahora que tenemos un modelo completo podemos empezar a hacer vistas más complej
 ```
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Order
+from .models import Order,Client
  
 # Create your views here.
 def index(request):
@@ -284,7 +284,26 @@ def index(request):
         'listado_ordenes': orders
     }
     return render(request, 'orders.html' ,context)
+    
+def cliente_detail(request, client_id):
+    client = Client.objects.get(pk=client_id)
+    context = {
+        'titulo_pagina': 'Detalles del Cliente',
+        'cliente': client
+    }
+    return render(request, 'client.html' ,context)
 ```
+Para esto debemos agregar la url de la segunda vista
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+   path('', views.index, name='index'),
+   path('cliente/<int:client_id>', views.cliente_detail, name='cliente')
+]
+```
+
 Primero traemos la información de las órdenes de la base de datos, en el contexto especificamos las variables que se usarán en el template y el ```orders.html``` es la plantilla que se renderiza al llamar a esta vista mediante la urls.
 
 Para crear el template ```orders.html``` primero se debe añadir la siguiente configuracion en el archivo settings.py
@@ -338,6 +357,14 @@ li > h3 {
     border-radius: 10px;
     background: #2a9d8f;
 }
+
+a{
+    padding: 10px 10px;
+    background: #e76f51;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}
 ```
 Dentro de la carpeta templates creamos un archivo llamado ```base.html```
 ```
@@ -365,7 +392,7 @@ Dentro de la carpeta templates creamos un archivo llamado ```base.html```
     </body>
 </html>
 ```
-Y por último el archivo referente a la vista ```orders.html```
+El archivo referente a la vista index ```orders.html```
 ```
 {% extends 'base.html' %}
 
@@ -375,11 +402,16 @@ Y por último el archivo referente a la vista ```orders.html```
     <li>
         <h3>Orden Id: {{orden.id}} </h3>
         <p><strong>El cliente es:</strong></p>
-        <p>{{orden.client}} </p>
+        <p>{{orden.client.name}}</p>
+        <a href={% url 'cliente' orden.client.id %}>Ver Datos Cliente</a>
         <p><strong>Los productos que ordenó son:</strong></p>
         
         {% for producto in orden.product.all %}
-        <p>{{producto}}</p>
+        <ul>
+            <li>ID: {{producto.id}} - Nombre: {{producto.name}}</li>
+            <li>Precio: {{producto.price}}</li>
+            <li>Descripcion: {{producto.description}}</li>
+        </ul>
         {% endfor %}
     </li>
     <hr>
@@ -388,6 +420,34 @@ Y por último el archivo referente a la vista ```orders.html```
 
 {% endblock %}
 ```
+Y por ultimo, la vista del cliente ```client.html```
+```
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% if cliente %}
+
+    <ul>
+        
+        <li>
+            <strong>ID:</strong> {{cliente.id}}
+        </li>
+        <li>
+            <strong>Nombre:</strong> {{cliente.name}}
+        </li>
+        <li>
+            <strong>Telefono:</strong> {{cliente.phone}}
+        </li>
+        <li>
+            <strong>Email:</strong> {{cliente.email}}
+        </li>
+    </ul>
+    <hr>
+    <a href={% url 'index' %}>Volver</a>
+{% endif %}
+{% endblock %}
+```
+
 Deberíamos terminar con la siguiente estructura.
 ```
 restaurant/
@@ -400,6 +460,7 @@ restaurant/
     |__ templates/
         |__ base.html
         |__ orders.html
+        |__ client.html
     |__ __init__.py
     |__ admin.py
     |__ apps.py
