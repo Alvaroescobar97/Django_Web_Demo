@@ -62,7 +62,7 @@ django-admin --version
 
 ## 🔩 Arquitectura y Estructura 
 
-![Contenido](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Arquitectura.png)
+![Arquitectura&Estructura](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Arquitectura.png)
 
 Una vez instalado el framework con sus dependencias en el entorno virtual podemos crear el proyecto
 ```
@@ -106,6 +106,7 @@ Para comprobar que el proyecto funciona dentro del directorio del proyecto ```we
 ```
 python manage.py runserver
 ```
+![Running-App](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/django.png)
 Deberiamos ver la siguiente linea en la consola ```Starting development server at http://127.0.0.1:8000/```
 
 Django viene con una utilidad que genera automáticamente la estructura de directorios básica para una aplicación, por lo que podemos concentrarnos en escribir código en lugar de crear directorios.
