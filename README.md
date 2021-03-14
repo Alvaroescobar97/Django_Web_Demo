@@ -78,19 +78,19 @@ webDemo/
 ```
 El directorio exterior ```webDemo/``` es la carpeta del proyecto.
 
-```manage.py``` es una utilidad para la linea de comandos (CLI) que permite interactuar con el proyecto de Django de varias formas. Para más información: https://docs.djangoproject.com/en/1.8/ref/django-admin/
+* ```manage.py``` es una utilidad para la linea de comandos (CLI) que permite interactuar con el proyecto de Django de varias formas. Para más información: https://docs.djangoproject.com/en/1.8/ref/django-admin/
 
 El directorio interno ```webDemo/``` es el paquete de Python real para su proyecto. Su nombre es el nombre del paquete de Python que necesitará usar para importar cualquier cosa dentro de él (Ej: webDemo.urls).
 
-```__ init__.py``` es un archivo vacío que le dice a Python que este directorio debe considerarse un paquete de Python.
+* ```__ init__.py``` es un archivo vacío que le dice a Python que este directorio debe considerarse un paquete de Python.
 
-```settings.py```  configuración para este proyecto de Django. Para más información: https://docs.djangoproject.com/en/1.8/topics/settings/
+* ```settings.py```  configuración para este proyecto de Django. Para más información: https://docs.djangoproject.com/en/1.8/topics/settings/
 
-```urls.py``` son las declaraciones de las URL’s para este proyecto de Django. Puntos de entrada para la aplicación.
+* ```urls.py``` son las declaraciones de las URL’s para este proyecto de Django. Puntos de entrada para la aplicación.
 
-```wsgi.py``` es un punto de entrada para servidores web compatibles con WSGI para servir su proyecto.
+* ```wsgi.py``` es un punto de entrada para servidores web compatibles con WSGI para servir su proyecto.
 
-```asgi.py``` además de WSGI, Django también admite la implementación en ASGI, el estándar emergente de Python para aplicaciones y servidores web asíncronos.
+* ```asgi.py``` además de WSGI, Django también admite la implementación en ASGI, el estándar emergente de Python para aplicaciones y servidores web asíncronos.
 
 Formas de interactuar con el framework
 ```
