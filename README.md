@@ -14,7 +14,7 @@ https://www.python.org/downloads/
 
 Adicionalmente instalar pip, que es el gestor de paquetes de Python ejecutando el siguiente comando
 ```
-py get-pip.py
+python get-pip.py
 ```
 ## 📦 Creación del entorno virtual 
 
@@ -26,7 +26,7 @@ Para crear el entorno virtual
 ```
 virtualenv web_env
 ```
-Esto creará el directorio web_env, el cual tiene la siguiente estructura
+Esto creará el directorio ```web_env```, el cual tiene la siguiente estructura
 ```
 /web_env
    |__ /Lib
@@ -34,8 +34,8 @@ Esto creará el directorio web_env, el cual tiene la siguiente estructura
    |__ .gitignore
    |__ pyenv.cfg
 ```
-El directorio /Lib contiene las librerías necesarias para correr nuestro código.
-El directorio /Scripts contiene los ejecutables: como el intérprete de Python o pip.
+El directorio ```/Lib``` contiene las librerías necesarias para correr nuestro código.
+El directorio ```/Scripts``` contiene los ejecutables: como el intérprete de Python o pip.
 
 Para listar todos los paquetes y/o librerías instalados en el entorno virtual 
 ```
@@ -50,11 +50,11 @@ deactivate
 
 ### 🛠️ Instalación 
 
-Para instalar Django ejecutar dentro del entorno virtual \web_env
+Para instalar Django ejecutar dentro del entorno virtual ```\web_env```
 ```
 pip install django
 ```
-Podemos tambien comprobar la version del framework con el comando
+Podemos también comprobar la versión del framework con el comando 
 ```
 django-admin --version
 ```
@@ -62,7 +62,7 @@ Una vez instalado el framework con sus dependencias en el entorno virtual podemo
 ```
 django-admin startproject webDemo
 ```
-Esto creará un directorio .\webDemo dentro del entorno virtual con la siguiente estructura
+Esto creará un directorio ```.\webDemo``` dentro del entorno virtual con la siguiente estructura
 ```
 webDemo/
     |__ manage.py
@@ -106,6 +106,7 @@ Deberiamos ver la siguiente linea en la consola ```Starting development server a
 Django viene con una utilidad que genera automáticamente la estructura de directorios básica para una aplicación, por lo que podemos concentrarnos en escribir código en lugar de crear directorios.
 
 _Nota:    Proyectos vs. Aplicaciones_
+
 Una aplicación es una aplicación web que hace algo, por ejemplo, un sistema de registro web, una base de datos de registros públicos o una aplicación de encuesta simple. Un proyecto es una colección de configuraciones y aplicaciones para un sitio web en particular. Un proyecto puede contener varias aplicaciones. Una aplicación puede estar en varios proyectos.
 
 Para crear una aplicación, hay que asegurarse de estar en el directorio exterior ```webDemo/``` pa interactuar con ```manage.py``` y ejecutar el siguiente comando
@@ -160,6 +161,7 @@ urlpatterns = [
 ```
 Y por último, debemos enlazar el archivo ```restaurant\urls.py``` de la aplicación con el archivo ```webDemo\urls.py``` del proyecto.
 ```
+from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
@@ -172,23 +174,30 @@ Si entramos a la ruta http://127.0.0.1:8000/webDemo/ desde el navegador podemos 
 Luego de crear nuestra primera vista debemos definir el modelo de nuestra aplicación dentro del archivo ```restaurant\models.py```
 ```
 from django.db import models
-
 # Create your models here.
-
-class Ingrediente(models.Model):
-   nombre = models.CharField(max_length=50)
-   cantidad = models.IntegerField(default=0)
-
-   def __str__(self):
-       return f"id={self.id}, nombre={self.nombre},cantidad={self.cantidad}"
-
-class Plato(models.Model):
-   nombre = models.CharField(max_length=50)
-   descripcion = models.CharField(max_length=50)
-   ingredientes = models.ManyToManyField(Ingrediente)
-
-   def __str__(self):
-       return f"id={self.id}, nombre={self.nombre},descripcion={self.descripcion},ingredientes={self.ingredientes}"
+ 
+class Client(models.Model):
+    name = models.CharField(max_length=50)
+    phone = models.IntegerField()
+    email =  models.EmailField(max_length = 50) 
+ 
+    def __str__(self):
+        return f"id={self.id},name={self.name},phone={self.phone},email={self.email}"
+    
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    price = models.FloatField() 
+    description = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return f"id={self.id},name={self.name},price={self.price},description={self.description}"    
+    
+class Order(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    product = models.ManyToManyField(Product)
+    
+    def __str__(self):
+        return f"id={self.id}, client={self.client}"
 ```
 Una vez tenemos definido el modelo se puede ejecutar el siguiente comando para crear las migraciones que se plasmarán en el modelo en la base de datos
 ```
@@ -200,7 +209,7 @@ python manage.py migrate
 ```
 Lo que creará un nuevo archivo en la carpeta ```restaurant\migrations``` con el historial de las migraciones realizadas.
 
-Si quisieramos obtener más información o cambiar la base de datos del proyecto (SQLite) podemos configurar esto en el archivo ```settings.py``` del proyecto.
+Si quisiéramos obtener más información o cambiar la base de datos del proyecto (SQLite) podemos configurar esto en el archivo ```settings.py``` del proyecto.
 ```
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -212,10 +221,170 @@ DATABASES = {
     }
 }
 ```
+Ahora bien, para agregar datos a la base de datos podemos acceder al shell de Python mediante el siguiente comando
+```
+python manage.py shell
+```
+Una Vez dentro del shell de Python podemos importar el modelo para instanciar datos mediante la consola
+```
+>>> from restaurant.models import Client, Product, Order
+>>> product = Product(name="Pollo en Salsa de Mango al curry",price=45.500,description="delicioso plato para compartir entre 2 personas")
+>>> product.save()
+>>> product.id
+1
+>>> product.name
+'Pollo en Salsa de Mango al curry'
+>>> Product.objects.all()
+<QuerySet [<Product: id=2,name=Pollo en Salsa de Mango al curry,price=45.5,description=delicioso plato para compartir entre 2 personas>, <Product: id=3,name=Pollo en Salsa de Mango al curry,price=45.5,description=delicioso plato para compartir entre 2 personas>]>
+>>> exit()
+```
+Utilizando la aplicación de administración que trae integrado el framework para facilitar el trabajo de crear, leer, actualizar y eliminar (CRUD) registros en la base de datos.
+
+Para usar la aplicación de superusuario se deben importar los modelos en el archivo admin.py de la aplicación y registrarlos
+```
+from django.contrib import admin
+# Register your models here.
+from .models import Client,Product,Order
+admin.site.register(Client)
+admin.site.register(Product)
+admin.site.register(Order)
+```
+Posteriormente crear un superusuario y ya estará disponible
+```
+python manage.py createsuperuser
+
+Username: admin
+Email address: example@gmail.com 
+Password: 123456
+Password (again): 123456
+```
+El email que se muestra no es un email válido pero se recuerda que debe serlo para poder continuar.
+
+Iniciamos el servidor local nuevamente con el comando ```python manage.py runserver``` e ingresamos a la ruta que nos provee django por defecto que es ```http://127.0.0.1:8000/admin/```
+
+Donde veremos un menú lateral con nuestras clases del modelo y las opciones a agregar (add) o cambiar (change)
+
+Ahora que tenemos un modelo completo podemos empezar a hacer vistas más complejas
+```
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Order
+ 
+# Create your views here.
+def index(request):
+    orders = Order.objects.all()
+    context = {
+        'titulo_pagina': 'Ordenes del Restaurante',
+        'listado_ordenes': orders
+    }
+    return render(request, 'orders.html' ,context)
+```
+Primero traemos la información de las órdenes de la base de datos, en el contexto especificamos las variables que se usarán en el template y el ```orders.html``` es la plantilla que se renderiza al llamar a esta vista mediante la urls.
+
+Para crear el template ```orders.html``` primero se debe añadir la siguiente configuracion en el archivo settings.py
+```
+STATICFILES_DIRS = [BASE_DIR / "static"]
+```
+Y ahora creamos el directorio donde almacenaremos los archivos estáticos de la aplicación, damos click derecho sobre la aplicación restaurant y creamos las carpetas ```static``` y ```templates```. Dentro de la carpeta ```stati```c creamos otra llamada ```css``` y posteriormente un archivo llamado ```styles.css```. Dentro incluiremos los siguientes estilos:
+```
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+h1,h2,h3{
+    margin: 0;
+}
+
+h1{
+    display: block;
+    text-align:center;
+    padding: 20px;
+    color: white;
+    background: #264653;
+}
+
+.contenedor{
+    max-width: 90%;
+    margin: 50px auto 0 auto;
+}
+
+h2{
+    display: block;
+    text-align:center;
+    padding: 20px;
+    color: black;
+    border-radius: 10px;
+    background: #f4a261;
+}
+
+ul{
+    margin: 25px 0 0 0;
+    list-style: none;
+    padding: 0;
+}
+
+li > h3 {
+    display: block;
+    text-align:center;
+    padding: 5px;
+    color: black;
+    border-radius: 10px;
+    background: #2a9d8f;
+}
+```
+Dentro de la carpeta templates creamos un archivo llamado ```base.html```
+```
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Restaurante</title>
+</head>
+<style>
+
+</style>
+    <body>
+        <h1>Aplicación Restaurante</h1>
+        <div class="contenedor">
+
+            <h2>{{titulo_pagina}}</h2>
+
+            {% block contenido %} {% endblock %}
+        </div>
+    </body>
+</html>
+```
+Y por ultimo el archivo referente a la vista ```orders.html```
+```
+{% extends 'base.html' %}
+
+{% block contenido %}
+<ul>
+    {% for orden in listado_ordenes %}
+    <li>
+        <h3>Orden Id: {{orden.id}} </h3>
+        <p><strong>El cliente es:</strong></p>
+        <p>{{orden.client}} </p>
+        <p><strong>Los productos que ordenó son:</strong></p>
+        
+        {% for producto in orden.product.all %}
+        <p>{{producto}}</p>
+        {% endfor %}
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+```
 
 
 ### ✒️ Autores 
 
 * Álvaro José Escobar González
 * Juan Manuel Castillo Herrera
-
