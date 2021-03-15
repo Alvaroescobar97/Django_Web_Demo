@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'webDemo.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080/'
-]
+#CORS_ORIGIN_WHITELIST = [
+#    'http://localhost:8080/'
+#]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
