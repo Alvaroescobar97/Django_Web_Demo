@@ -8,3 +8,4 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=15)
     email = models.CharField(max_length=80)
     website = models.CharField(max_length=100)
+    iconUrl = models.CharField(max_length=120)
