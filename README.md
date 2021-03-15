@@ -468,11 +468,102 @@ restaurant/
     |__ tests.py
     |__ views.py
 ```
+## 👨‍💻 API Rest
+
+Se realizó la inclusión de la aplicación "apirest" dentro del proyecto "Django_Web_Demo" en la que se incluirá la exposición de servicios de API comportandose como backend y siendo consumida por el framework progresivo visto en clase, Vue en su versión 3.0.
+
+Una vez creada la aplicación, la agregaremos al proyecto ```WebDemo``` mediante el archivo ```settings.py``` incluyendo la siguiente linea el apartado de ```INSTALLED_APPS``` quedando de la siguiente manera:
+
+```
+INSTALLED_APPS = [
+...
+    'apirest'
+]
+```
+
+Añadimos nuestra nueva url de la aplicación para que esta pueda ser reconocida en el proyecto mediante el archivo ```urls.py``` dentro de la misma carpeta ```WebDemo``` en la sección de ```urlpatterns``` con la siguientes lineas:
+```
+urlpatterns = [
+  ...
+   path('api/', include('apirest.urls'))
+]
+```
+
+Agregaremos en el archivo ```models.py``` ubicado en la carpeta de neustra aplicación ```apirest```. Las siguientes lineas se incluirán con el fin de introducir nuestro modelo, en este caso, enfocado a restaurantes.
+
+```
+class Restaurant(models.Model):
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15)
+    email = models.CharField(max_length=80)
+    website = models.CharField(max_length=100)
+    iconUrl = models.CharField(max_length=120)
+```
+
+Ingresaremos en el archivo ```views.py``` en el que se expondrán nuestros servicios. En este caso, crearemos dos peticiones de tipo GET que nos permitan acceder a la lista de restaurantes, a un restaurante exactamente y el filtrado de busqueda de coincidencias por nombre:
+
+```
+from django.views import View
+from .models import Restaurant
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+
+
+class RestaurantListView(View):
+    def get(self, request):
+        if('name' in request.GET):
+            restaurantList = Restaurant.objects.filter(name__contains=request.GET['name'])
+        else:     
+            restaurantList = Restaurant.objects.all()
+        return JsonResponse(list(restaurantList.values()), safe=False)
+
+
+class RestaurantDetailView(View):
+    def get(self, request, pk):
+        restaurant = Restaurant.objects.get(pk=pk)
+        return JsonResponse(model_to_dict(restaurant))
+
+```
+
+Para poder visualizar los restaurantes en su formato JSON debemos asignarles un endpoint que permita identificar la petición que será realizada, por lo que nos dirigiremos al archivo ```urls.py``` y agregaremos las urls correspondientes:
+
+```
+from django.urls import path
+from .views import RestaurantListView
+from .views import RestaurantDetailView
+
+urlpatterns = [
+    path('restaurant/', RestaurantListView.as_view(), name='restaurant_list'),
+    path('restaurant/<int:pk>/', RestaurantDetailView.as_view(), name='restaurant')
+]
+
+
+```
+
+Listo! Ya tenemos todo para probar nuestra API. Finalmente para poder interactuar con esta, debemos agregar el admin de Django para el control de nuestros datos. Lo realizaremos introduciendo las siguientes lineas en el archivo ```admin.py``` y nos fijaremos que estamos registrando el nombre de la clase almacenada en el modelo, en este caso, "Restaurant"
+
+```
+from django.contrib import admin
+from .models import Restaurant
+
+# Register your models here.
+admin.site.register(Restaurant)
+
+```
+Repetimos el procedimiento para crear las migraciones que se plasmarán en el modelo en la base de datos
+```
+python manage.py makemigrations restaurant
+```
+Una vez más, agregamos las migraciones a la base de datos mediante el siguiente comando
+```
+python manage.py migrate
+```
+Con esto, ya podremos ejecutar nuestra API
+```
+python manage.py runserver
+```
 
 ## 📖 Conceptos Avanzados
-
-
-
 
 
 ## ✒️ Autores 
