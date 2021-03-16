@@ -647,7 +647,7 @@ Si tu proyecto no se ejecuta correctamente:
 
 * Recuerda encontrarte en el path correcto. 
 * Tener en un funcionamiento tu ambiente de desarrollo.
-* En caso de los cambios del CSS no se visualicen correctamente puede ser necesario eliminar el caché del navegador que se esté usando.
+* En caso de que los cambios del CSS no se visualicen correctamente puede ser necesario eliminar el caché del navegador que se esté usando.
 * Ejecutar los comandos de migraciones al realizar al alguna modificación que no permita el funcionamiento directo mediante ```python manage.py runserver```.
 * En caso de que no reconozca la palabra ```python``` en la consola, recuerda revisar hacia donde está apuntando tu IDE para el funcionamiento ambiente de desarrollo. Podrías intentar en lugar de ```python``` la palabra reservada ```python3``` ó ```py```. Por ejemplo ```py manage.py runserver```
 
