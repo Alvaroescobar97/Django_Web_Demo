@@ -211,6 +211,8 @@ class Order(models.Model):
     def __str__(self):
         return f"id={self.id}, client={self.client}"
 ```
+![Diagrama UML](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Diagrama-Restaurante.PNG)
+
 Una vez tenemos definido el modelo se puede ejecutar el siguiente comando para crear las migraciones que se plasmarán en el modelo en la base de datos
 ```
 python manage.py makemigrations restaurant
