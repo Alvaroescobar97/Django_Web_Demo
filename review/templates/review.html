@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>Reseñas del Restaurante</title>
+</head>
+<style>
+
+</style>
+    <body>
+        <h1>Reseñas</h1>
+        <form action="{% url 'postReviewForm' %}" method="post"> {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Registrar Reseña">
+        </form>
+    </body>
+</html>

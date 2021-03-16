@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.staticfiles',
     'restaurant',
-    'apirest'
+    'apirest',
+    'review'
 ]
 
 MIDDLEWARE = [
