@@ -572,6 +572,57 @@ Si tu proyecto no se ejecuta correctamente:
 * Ejecutar los comandos de migraciones al realizar al alguna modificación que no permita el funcionamiento directo mediante ```python manage.py runserver```.
 * En caso de que no reconozca la palabra ```python``` en la consola, recuerda revisar hacia donde está apuntando tu IDE para el funcionamiento ambiente de desarrollo. Podrías intentar en lugar de ```python``` la palabra reservada ```python3``` ó ```py```. Por ejemplo ```py manage.py runserver```
 
+Al realizar el front bajo el framework progresivo Vue 3, este mostraba error al llamar mediante el axios cualquier petición perteneciente a la api del proyecto en Django:
+
+```
+ No Access-Control-Allow-Origin header is present on the requested resource.
+```
+Puedes obtener más información de este error aquí:
+
+* https://developer.mozilla.org/es/docs/Web/HTTP/CORS/Errors/CORSMissingAllowOrigin
+
+Si también te sucede, debes seguir los siguientes pasos para solucionar los problemas de CORS:
+
+Nos situamos en la consola donde estamos ejecutando nuestro proyecto de Django y colocaremos la siguiente linea:
+
+```
+ python -m pip install django-cors-headers
+```
+
+En caso de no tener pip: (En Linux)
+
+```
+apt install python-pip
+```
+
+Luego, nos situaremos en el archivo ```webDemo/settings.py``` del proyecto ```WebDemo``` y nos iremos a la sección de ```INSTALLED APPS``` para agregar las siguientes lineas al final:
+```
+INSTALLED_APPS = [
+    ...
+    'corsheaders',
+    ...
+]
+```
+
+Asegurate de agregar la coma al final en caso de que no lo hayas puesto al final o podría obtener un ModuleNotFoundError.
+También deberás agregar una clase de middleware para escuchar las respuestas:
+```
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...
+]
+```
+CorsMiddleware debe colocarse lo más alto posible, especialmente antes de cualquier middleware que pueda generar respuestas como CommonMiddleware de Django o WhiteNoiseMiddleware de Whitenoise. Si no es antes, no podrá agregar los encabezados CORS a estas respuestas. Además, si estás utilizando CORS_REPLACE_HTTPS_REFERER, debe colocarse antes de CsrfViewMiddleware de Django.
+
+Listo! Ya casi estamos. Debemos ingresar abajo de la sección ```MIDDLEWARE``` la linea que permitirá la excpeción al problema de CORS:
+```
+CORS_ALLOW_ALL_ORIGINS = True
+```
+Después de ejecutar la aplicación en Django con éxito, solo nos queda ejecutar Vue para realizar la petición y ver que esta se ha realizado correctamente.
+
+
 ## 📖 Conceptos Avanzados
 
 
