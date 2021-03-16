@@ -24,7 +24,7 @@ Adicionalmente instalar pip, que es el gestor de paquetes de Python ejecutando e
 ```
 python get-pip.py
 ```
-## 📦 Creación del entorno virtual 
+## :card_file_box: Creación del entorno virtual 
 
 En primer lugar instalar el gestor de entornos mediante el administrador de paquetes
 ```
@@ -151,7 +151,7 @@ INSTALLED_APPS = (
     'restaurant',
 )
 ```
-## ⌨️ Primeros pasos 
+## :computer: Primeros pasos 
 
 Para empezar vamos a crear la primera vista con Django en el archivo ```views.py``` dentro del directorio de la aplicación restaurant
 ```
@@ -398,7 +398,7 @@ Dentro de la carpeta templates creamos un archivo llamado ```base.html```
     </body>
 </html>
 ```
-El archivo referente a la vista index ```orders.html```
+El template referente a la vista index ```orders.html```.
 ```
 {% extends 'base.html' %}
 
@@ -426,7 +426,7 @@ El archivo referente a la vista index ```orders.html```
 
 {% endblock %}
 ```
-Y por ultimo, la vista del cliente ```client.html```
+Y por ultimo, el template asociado a la vista del cliente ```client.html```.
 ```
 {% extends 'base.html' %}
 
@@ -453,6 +453,8 @@ Y por ultimo, la vista del cliente ```client.html```
 {% endif %}
 {% endblock %}
 ```
+Django nos provee un lenguaje para usar en las plantillas, las cuales son reconocidas por el motor de plantillas, entre las principales se encuentran las variables y etiquetas, para obtener más información sobre este lenguaje de plantillas consultar la documentación:
+https://docs.djangoproject.com/en/3.1/topics/templates/#:~:text=A%20Django%20template%20is%20a,interpreted%20by%20the%20template%20engine.&text=A%20template%20is%20rendered%20with,the%20context%2C%20and%20executes%20tags.
 
 Deberíamos terminar con la siguiente estructura.
 ```
@@ -474,12 +476,13 @@ restaurant/
     |__ tests.py
     |__ views.py
 ```
+## :dart: Conceptos Avanzados
+
 ## 👨‍💻 API Rest
 
 Se realizó la inclusión de la aplicación "apirest" dentro del proyecto "Django_Web_Demo" en la que se incluirá la exposición de servicios de API comportandose como backend y siendo consumida por el framework progresivo visto en clase, Vue en su versión 3.0.
 
 Una vez creada la aplicación, la agregaremos al proyecto ```WebDemo``` mediante el archivo ```settings.py``` incluyendo la siguiente linea el apartado de ```INSTALLED_APPS``` quedando de la siguiente manera:
-
 ```
 INSTALLED_APPS = [
 ...
@@ -495,8 +498,7 @@ urlpatterns = [
 ]
 ```
 
-Agregaremos en el archivo ```models.py``` ubicado en la carpeta de neustra aplicación ```apirest```. Las siguientes lineas se incluirán con el fin de introducir nuestro modelo, en este caso, enfocado a restaurantes.
-
+Agregaremos en el archivo ```models.py``` ubicado en la carpeta de nuestra aplicación ```apirest```. Las siguientes lineas se incluirán con el fin de introducir nuestro modelo, en este caso, enfocado a restaurantes.
 ```
 class Restaurant(models.Model):
     name = models.CharField(max_length=50)
@@ -507,7 +509,6 @@ class Restaurant(models.Model):
 ```
 
 Ingresaremos en el archivo ```views.py``` en el que se expondrán nuestros servicios. En este caso, crearemos dos peticiones de tipo GET que nos permitan acceder a la lista de restaurantes, a un restaurante exactamente y el filtrado de búsqueda de coincidencias por nombre:
-
 ```
 from django.views import View
 from .models import Restaurant
@@ -532,7 +533,6 @@ class RestaurantDetailView(View):
 ```
 
 Para poder visualizar los restaurantes en su formato JSON debemos asignarles un endpoint que permita identificar la petición que será realizada, por lo que nos dirigiremos al archivo ```urls.py``` y agregaremos las urls correspondientes:
-
 ```
 from django.urls import path
 from .views import RestaurantListView
@@ -547,7 +547,6 @@ urlpatterns = [
 ```
 
 Listo! Ya tenemos todo para probar nuestra API. Finalmente para poder interactuar con esta, debemos agregar el admin de Django para el control de nuestros datos. Lo realizaremos introduciendo las siguientes lineas en el archivo ```admin.py``` y nos fijaremos que estamos registrando el nombre de la clase almacenada en el modelo, en este caso, "Restaurant"
-
 ```
 from django.contrib import admin
 from .models import Restaurant
@@ -574,12 +573,12 @@ python manage.py runserver
 Si tu proyecto no se ejecuta correctamente:
 
 * Recuerda encontrarte en el path correcto. 
-* Tener en un funcionamiento tu ambiente de desarrollo
+* Tener en un funcionamiento tu ambiente de desarrollo.
+* En caso de los cambios del CSS no se visualicen correctamente puede ser necesario eliminar el caché del navegador que se esté usando.
 * Ejecutar los comandos de migraciones al realizar al alguna modificación que no permita el funcionamiento directo mediante ```python manage.py runserver```.
 * En caso de que no reconozca la palabra ```python``` en la consola, recuerda revisar hacia donde está apuntando tu IDE para el funcionamiento ambiente de desarrollo. Podrías intentar en lugar de ```python``` la palabra reservada ```python3``` ó ```py```. Por ejemplo ```py manage.py runserver```
 
 Al realizar el front bajo el framework progresivo Vue 3, este mostraba error al llamar mediante el axios cualquier petición perteneciente a la api del proyecto en Django:
-
 ```
  No Access-Control-Allow-Origin header is present on the requested resource.
 ```
@@ -590,13 +589,11 @@ Puedes obtener más información de este error aquí:
 Si también te sucede, debes seguir los siguientes pasos para solucionar los problemas de CORS:
 
 Nos situamos en la consola donde estamos ejecutando nuestro proyecto de Django y colocaremos la siguiente linea:
-
 ```
  python -m pip install django-cors-headers
 ```
 
 En caso de no tener pip: (En Linux)
-
 ```
 apt install python-pip
 ```
@@ -627,10 +624,6 @@ Listo! Ya casi estamos. Debemos ingresar abajo de la sección ```MIDDLEWARE``` l
 CORS_ALLOW_ALL_ORIGINS = True
 ```
 Después de ejecutar la aplicación en Django con éxito, solo nos queda ejecutar Vue para realizar la petición y ver que esta se ha realizado correctamente.
-
-
-## 📖 Conceptos Avanzados
-
 
 ## ✒️ Autores 
 
