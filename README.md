@@ -622,7 +622,7 @@ MIDDLEWARE = [
 ```
 CorsMiddleware debe colocarse lo más alto posible, especialmente antes de cualquier middleware que pueda generar respuestas como CommonMiddleware de Django o WhiteNoiseMiddleware de Whitenoise. Si no es antes, no podrá agregar los encabezados CORS a estas respuestas. Además, si estás utilizando CORS_REPLACE_HTTPS_REFERER, debe colocarse antes de CsrfViewMiddleware de Django.
 
-Listo! Ya casi estamos. Debemos ingresar abajo de la sección ```MIDDLEWARE``` la linea que permitirá la excpeción al problema de CORS:
+Listo! Ya casi estamos. Debemos ingresar abajo de la sección ```MIDDLEWARE``` la linea que permitirá la excepción al problema de CORS:
 ```
 CORS_ALLOW_ALL_ORIGINS = True
 ```
