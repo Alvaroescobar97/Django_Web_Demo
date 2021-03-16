@@ -506,7 +506,7 @@ class Restaurant(models.Model):
     iconUrl = models.CharField(max_length=120)
 ```
 
-Ingresaremos en el archivo ```views.py``` en el que se expondrán nuestros servicios. En este caso, crearemos dos peticiones de tipo GET que nos permitan acceder a la lista de restaurantes, a un restaurante exactamente y el filtrado de busqueda de coincidencias por nombre:
+Ingresaremos en el archivo ```views.py``` en el que se expondrán nuestros servicios. En este caso, crearemos dos peticiones de tipo GET que nos permitan acceder a la lista de restaurantes, a un restaurante exactamente y el filtrado de búsqueda de coincidencias por nombre:
 
 ```
 from django.views import View
