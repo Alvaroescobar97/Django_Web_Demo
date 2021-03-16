@@ -478,6 +478,79 @@ restaurant/
 ```
 ## :dart: Conceptos Avanzados
 
+Para estudiar los formularios crearemos otra aplicación llamada review con el comando ```python manage.py startapp review``` donde estarán las reseñas del restaurante. Enlazamos esta nueva aplicación al proyecto
+```
+INSTALLED_APPS = [
+...
+‘review’
+]
+```
+Dentro de la aplición creamos un archivo ```forms.py``` donde se define el formulario usando la clase genérica ```forms.Form``` la cual se debe importar de la siguiente manera:
+```
+from django import forms
+ 
+class ReviewForm(forms.Form):
+    name_restaurant = forms.CharField(label="Nombre Restaurante: ", max_length=100)
+    name_client = forms.CharField(label="Nombre Cliente: ", max_length=150)
+    review = forms.CharField(label="Reseña: ", max_length=250)
+    address = forms.CharField(label="Direccion del Restaurante")
+    stars = forms.IntegerField(label="Calificación: ")
+```
+Posteriormente definimos las rutas de entrada de la aplicación creando el archivo ```urls.py``` con el siguiente contenido:
+```
+from django.urls import path
+from . import views
+urlpatterns = [
+   path('', views.showForm, name='showForm'),
+   path('post_review/', views.post_revieForm, name='postReviewForm')
+]
+```
+Posteriormente creamos las vistas de las URL's
+```
+from django.shortcuts import render
+from .forms import ReviewForm
+from django.http import HttpResponse
+
+# Create your views here.
+def showForm(request):
+    form = ReviewForm()
+    return render(request, 'review.html',{'form':form})
+    
+def post_revieForm(request):
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+        nombre_restaurante = form.cleaned_data['name_restaurant']
+        nombre_cliente = form.cleaned_data['name_client']
+        resenia = form.cleaned_data['review']
+        direccion = form.cleaned_data['address']
+        calificacion = form.cleaned_data['stars']
+        return HttpResponse(f"Restaurante: {nombre_restaurante} - Cliente: {nombre_cliente} - Reseña: {resenia} - Direccion Restaurante: {direccion} - Calificación: {calificacion}")
+```
+Y por último, creamos la carpeta templates dentro de la aplicación y dentro el template asociado a la vista showForm llamado ```review.html```
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>Reseñas del Restaurante</title>
+</head>
+<style>
+
+</style>
+    <body>
+        <h1>Reseñas</h1>
+        <form action="{% url 'postReviewForm' %}" method="post"> {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Registrar Reseña">
+        </form>
+    </body>
+</html>
+```
+Ademas de Form hay otras vistas basadas en clases genericas como:
+* ListView
+* DetailView
+
 ## 👨‍💻 API Rest
 
 Se realizó la inclusión de la aplicación "apirest" dentro del proyecto "Django_Web_Demo" en la que se incluirá la exposición de servicios de API comportandose como backend y siendo consumida por el framework progresivo visto en clase, Vue en su versión 3.0.
