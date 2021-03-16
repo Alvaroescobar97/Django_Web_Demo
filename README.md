@@ -4,7 +4,7 @@ Esta es una aplicación web desarrollada con Django y explicada para que cualqui
 
 ![Contenido](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Contenido.png)
 
-## 👴 Contexto
+## 📚 Contexto
 
 ![Contexto](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Contexto.png)
 ![Companies](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Companies.png)
