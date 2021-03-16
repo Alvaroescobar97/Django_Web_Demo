@@ -3,6 +3,7 @@
 Esta es una aplicación web desarrollada con Django y explicada para que cualquiera que quiera aprender a desarrollar aplicaciones web con Python & Django pueda seguir esta guia y aprender a trabajar con este maravilloso framework.
 
 ![Contenido](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Contenido.png)
+![Contexto](https://github.com/Alvaroescobar97/Django_Web_Demo/blob/master/imgs/Contexto.png)
 
 ## 📋 Requisitos 
 
